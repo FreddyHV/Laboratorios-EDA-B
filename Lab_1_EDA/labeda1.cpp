@@ -6,23 +6,23 @@
 #include <vector>
 
 int main() {
-    // Semilla para la generación de números aleatorios
+    // Aqui usaremos una semilla para la generación de números aleatorios
     srand(time(nullptr));
 
-    // Dimensiones de los conjuntos de datos
+    // Las dimensiones requeridad para hallar las distancias 
     std::vector<int> dimensions = {10, 50, 100, 500, 1000, 2000, 5000};
 
-    // Número de puntos aleatorios
+    // ingresamos los puntos aleatorios, en este caso 100
     int num_points = 100;
 
     for (int dim : dimensions) {
-        // Crear y abrir un archivo para guardar las distancias
+        // Creamos un archivo txt para cada histograma donde se escribirán los datos obtenidos 
         std::ofstream dist_file("distances_" + std::to_string(dim) + ".txt");
 
-        // Generar puntos aleatorios y calcular distancias
+        // En esta parte generamos los puntos aleatorios y hallamos las distancias 
         for (int i = 0; i < num_points; ++i) {
             for (int j = 0; j < num_points; ++j) {
-                // Generar coordenadas aleatorias en la dimensión d
+                // Se generan coordenadas aleatorias en la Dimensión d
                 std::vector<double> point1(dim);
                 std::vector<double> point2(dim);
 
@@ -31,23 +31,23 @@ int main() {
                     point2[k] = (double)rand() / RAND_MAX;
                 }
 
-                // Calcular la distancia euclidiana entre los puntos
+                // Calcula la distancia euclidiana entre los puntos
                 double distance = 0.0;
                 for (int k = 0; k < dim; ++k) {
                     distance += (point1[k] - point2[k]) * (point1[k] - point2[k]);
                 }
                 distance = sqrt(distance);
 
-                // Guardar la distancia en el archivo
+                // Guardar la distancia en el archivo txt
                 dist_file << distance << std::endl;
             }
         }
 
-        // Cerrar el archivo
+        // Cierra el archivo txt
         dist_file.close();
     }
 
     return 0;
 }
 
-
+//el output deberia ser 7 archivos txt con todas las dimensiones 
